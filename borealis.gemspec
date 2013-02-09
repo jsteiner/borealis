@@ -8,11 +8,15 @@ Gem::Specification.new do |gem|
   gem.version       = Borealis::VERSION
   gem.authors       = ["Josh Steiner"]
   gem.email         = ["josh@jsteiner.me"]
-  gem.description   = %q{Finds top colors from a given image.}
-  gem.summary       = %q{Finds top colors from a given image.}
+  gem.description   = %q{Finds top colors in a given image.}
+  gem.summary       = %q{Finds top colors in a given image.}
   gem.homepage      = ""
 
   gem.files         = `git ls-files`.split($/)
   gem.test_files    = gem.files.grep("spec")
   gem.require_paths = ["lib"]
+
+  gem.add_development_dependency 'rspec'
+
+  gem.add_dependency 'cocaine'
 end
