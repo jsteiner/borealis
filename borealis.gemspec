@@ -16,6 +16,8 @@ Gem::Specification.new do |gem|
   gem.test_files    = gem.files.grep("spec")
   gem.require_paths = ["lib"]
 
+  gem.requirements << 'ImageMagick'
+
   gem.add_development_dependency 'rspec'
 
   gem.add_dependency 'cocaine'
