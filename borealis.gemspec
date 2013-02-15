@@ -8,8 +8,8 @@ Gem::Specification.new do |gem|
   gem.version       = Borealis::VERSION
   gem.authors       = ["Josh Steiner"]
   gem.email         = ["josh@jsteiner.me"]
-  gem.description   = %q{Finds top colors in a given image.}
-  gem.summary       = %q{Finds top colors in a given image.}
+  gem.description   = %q{Finds most prominent colors in a given image.}
+  gem.summary       = %q{Finds most prominent colors in a given image.}
   gem.homepage      = ""
 
   gem.files         = `git ls-files`.split($/)
@@ -19,6 +19,7 @@ Gem::Specification.new do |gem|
   gem.requirements << 'ImageMagick'
 
   gem.add_development_dependency 'rspec'
+  gem.add_development_dependency 'bourne'
 
   gem.add_dependency 'cocaine'
 end

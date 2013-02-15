@@ -1,27 +1,37 @@
-require "cocaine"
-require "borealis/color"
-require "borealis/image_analyzer"
-require "borealis/version"
+require 'cocaine'
+
+require 'borealis/cluster'
+require 'borealis/color'
+require 'borealis/image_converter'
+require 'borealis/kmeans'
+require 'borealis/version'
 
 class Borealis
   attr_reader :colors
 
-  def initialize(file, analyzer = ImageAnalyzer)
-    analysis = analyzer.new(file).process
-    @colors = analysis.split("\n").map { |line| line_to_color(line) }
-    colors.sort!
+  def initialize(file, options = {})
+    image_colors = ImageConverter.to_colors(file, options[:size])
+    clusters = KMeans.run(image_colors, parse_options(options))
+    @colors = clusters.map(&:center)
+
+    self
   end
 
   def hexes
-    colors.map(&:hex)
+    @colors.map(&:hex)
+  end
+
+  def rgbs
+    @colors.map(&:rgb)
   end
 
   private
 
-  def line_to_color(line)
-    line = line.scan(/\(([\s+\d+,]+)\).+([\#][0-9,A-F,a-f]{6})/).flatten
-    rgb = line.first.split(',').map { |value| value.to_i }
-    hex = line.last
-    Color.new(rgb, hex)
+  def parse_options(options)
+    {
+      number_of_clusters: options[:colors],
+      iterations: options[:iterations],
+      static: options[:static]
+    }.reject{ |_,v| v.nil? }
   end
 end

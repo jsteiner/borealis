@@ -1,20 +1,37 @@
 require 'spec_helper'
 
-describe Borealis::Color, '#distance' do
+describe Borealis::Color, '#distance_to' do
   it 'calculates the distance correctly' do
-    color = Borealis::Color.new([1, 2, 3], 'hex')
-    expect(color.distance).to eq Math.sqrt(1 ^ 2 + 2 ^ 2 + 3 ^ 2)
+    color = Borealis::Color.new(1, 2, 3)
+    other_color = Borealis::Color.new(2, 3, 4)
+    distance = (1 - 2) ** 2 + (2 - 3) ** 2 + (3 - 4) ** 2
+
+    expect(color.distance_to(other_color)).to eq distance
   end
 end
 
-describe Borealis::Color, 'comparison' do
-  it 'compares colors according to distance' do
-    large_color = Borealis::Color.new([4, 5, 6], 'arbitrary')
-    small_color = Borealis::Color.new([2, 3, 4], 'arbitrary')
-    smallest_color = Borealis::Color.new([1, 2, 3], 'arbitrary')
+describe Borealis::Color, '#rgb' do
+  it 'returns a string with the correct rgb value' do
+    color = Borealis::Color.new(1, 2, 3)
+    expect(color.rgb).to eq '(1, 2, 3)'
+  end
+end
 
-    colors = [smallest_color, large_color, small_color]
+describe Borealis::Color, '#hex' do
+  it 'returns a string with the correct hex value' do
+    color = Borealis::Color.new(222, 2, 15)
+    expect(color.hex).to eq '#DE020F'
+  end
+end
 
-    expect(colors.sort).to eq [smallest_color, small_color, large_color]
+describe Borealis::Color, 'equality' do
+  it 'returns true if the colors have the same rgb' do
+    color = Borealis::Color.new(1, 2, 3)
+    expect(color).to eq Borealis::Color.new(1, 2, 3)
+  end
+
+  it 'returns false if the colors have different rgbs' do
+    color = Borealis::Color.new(1, 2, 3)
+    expect(color).not_to eq Borealis::Color.new(2, 2, 3)
   end
 end
