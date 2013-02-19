@@ -1,6 +1,8 @@
 # Borealis
 
-Borealis finds the most prominent colors in an image by using a clustering algorithm (k-means), which returns colors that are distinct from one another. It provides defaults which favor speed, but the defaults are easily changed if you prefer accuracy. For most purposes, the default settings should be accurate enough.
+Borealis finds the most prominent colors in an image, attempting to find colors that are distinct from one another.
+
+It provides defaults which favor speed, but the defaults are easily changed if you prefer accuracy. For most purposes, the default settings should be accurate enough.
 
 ## Installation
 
@@ -20,48 +22,63 @@ Or install it yourself as:
 
 Find the three prominent colors in an image:
 
-    Borealis.new('image/path.jpg').colors # Returns 3 colors with hex and rgb attributes
-    Borealis.new('image/path.jpg').hexes # Returns 3 hex values
-    Borealis.new('image/path.jpg').rgbs # Returns 3 rgb values
+```ruby
+Borealis.new('image/path.jpg').colors # Returns 3 colors with hex and rgb attributes
+Borealis.new('image/path.jpg').hexes # Returns 3 hex values
+Borealis.new('image/path.jpg').rgbs # Returns 3 rgb values
+```
 
 Easily get color values out of a color:
 
-    color = Borealis.new(file).colors.first
-    color.rgb # "(222, 2, 15)"
-    color.hex # "#DE020F"
+```ruby
+color = Borealis.new(file).colors.first
+color.rgb # "(222, 2, 15)"
+color.hex # "#DE020F"
+```
 
 Change the defaults:
 
-    borealis = Borealis.new('image/path.jpg',
-      size: '150x150',
-      colors: 3,
-      iterations: 10,
-      static: false
-    )
+```ruby
+borealis = Borealis.new('image/path.jpg',
+  size: '150x150',
+  colors: 3,
+  iterations: 10,
+  static: false
+)
+```
 
 ### Size
 
-Defaults to '50x50'.
+_Default: '50x50'_
 
-Size takes any arguments that imagemagick handles. See [here](http://www.imagemagick.org/script/command-line-processing.php#geometry) for reference.
+Size takes any [Image Geometry](http://www.imagemagick.org/script/command-line-processing.php#geometry) that imagemagick handles.
 
 For more accurate results, use a larger image. However, this comes at a severe time cost.
 
 ### Colors
 
-Defaults to 3.
+_Default: 3_
 
 The number of colors you want returned.
 
 ### Iterations
 
-Defaults to 3.
+_Default: 3_
 
 ### Static
 
-Defaults to true.
+_Default: true_
 
-Static determines whether the color output will be the same each time given the same image. Use false if you want the "best" colors to change each run.
+Static determines whether the color output will be the same each time given the same image. Use false if you want the colors to change each run.
+
+## How does it work?
+
+Borealis uses the [k-means](http://en.wikipedia.org/wiki/K-means_clustering) clustering algorithm, which in this case:
+
+1. Takes _n_ colors from the image as cluster centers
+2. Adds the rest of the colors to the cluster which they are closest to
+3. Finds the average color in each cluster, setting the results as new cluster centers
+4. Empties each cluster, except for the new center, and repeats steps 2-3 for _k_ iterations
 
 ## Contributing
 
