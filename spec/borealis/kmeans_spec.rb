@@ -33,17 +33,12 @@ describe Borealis::KMeans, '#run' do
     expect(clusters.map(&:center)).to eq colors
   end
 
-  it 'is successful' do
+  it 'returns number_of_clusters clusters' do
     colors = []
-    100.times { |index| colors << Borealis::Color.new(index, index * 2, index * 3) }
+    20.times { |index| colors << Borealis::Color.new(index, index * 2, index * 3) }
 
-    clusters = Borealis::KMeans.new(colors).run
+    clusters = Borealis::KMeans.new(colors, number_of_clusters: 8).run
 
-    centers = [
-      Borealis::Color.new(11, 23, 34),
-      Borealis::Color.new(40, 80, 120),
-      Borealis::Color.new(78, 156, 234)
-    ]
-    expect(clusters.map(&:center)).to eq centers
+    expect(clusters.length).to eq 8
   end
 end

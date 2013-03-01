@@ -16,13 +16,16 @@ class Borealis
         blue_sum += color.blue
       end
 
+      old_center = @center
       @center = Color.new(
         red_sum / colors.length,
         green_sum / colors.length,
         blue_sum / colors.length
       )
 
-      @colors = []
+      @colors.clear
+
+      old_center.distance_to @center
     end
   end
 end

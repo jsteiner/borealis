@@ -1,9 +1,13 @@
 class Borealis
   class KMeans
+    def self.run(colors, options = {})
+      KMeans.new(colors, options).run
+    end
+
     def initialize(colors, options = {})
       @colors = colors
       @number_of_clusters = options[:number_of_clusters] || 3
-      @iterations = options[:iterations] || 3
+      @delta = options[:delta] || 0.01
       @static = options.has_key?(:static) ? options[:static] : true
 
       if @number_of_clusters > @colors.length
@@ -11,17 +15,18 @@ class Borealis
       end
     end
 
-    def self.run(colors, options = {})
-      KMeans.new(colors, options).run
-    end
-
     def run
       if @colors.length == @number_of_clusters
         @colors.map { |color| Cluster.new(color) }
       else
-        @iterations.times do
+        pigs_can_fly = false
+        until pigs_can_fly do
           @colors.each { |color| add_to_closest_cluster(color) }
-          clusters.each { |cluster| cluster.recenter! }
+          max_delta = clusters.map { |cluster| cluster.recenter! }.max
+
+          if max_delta <= @delta
+            break
+          end
         end
 
         clusters

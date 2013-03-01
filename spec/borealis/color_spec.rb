@@ -1,10 +1,12 @@
 require 'spec_helper'
 
 describe Borealis::Color, '#distance_to' do
+  include Math
+
   it 'calculates the distance correctly' do
     color = Borealis::Color.new(1, 2, 3)
     other_color = Borealis::Color.new(2, 3, 4)
-    distance = (1 - 2) ** 2 + (2 - 3) ** 2 + (3 - 4) ** 2
+    distance = Math.sqrt((1 - 2) ** 2 + (2 - 3) ** 2 + (3 - 4) ** 2)
 
     expect(color.distance_to(other_color)).to eq distance
   end

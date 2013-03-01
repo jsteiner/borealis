@@ -30,7 +30,7 @@ class Borealis
   def parse_options(options)
     {
       number_of_clusters: options[:colors],
-      iterations: options[:iterations],
+      delta: options[:delta],
       static: options[:static]
     }.reject{ |_,v| v.nil? }
   end

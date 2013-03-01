@@ -1,5 +1,7 @@
 class Borealis
   class Color
+    include Math
+
     attr_reader :red, :green, :blue
 
     def initialize(red, green, blue)
@@ -9,7 +11,7 @@ class Borealis
     end
 
     def distance_to(other)
-      (red - other.red) ** 2 + (green - other.green) ** 2 + (blue - other.blue) ** 2
+      Math.sqrt((red - other.red) ** 2 + (green - other.green) ** 2 + (blue - other.blue) ** 2)
     end
 
     def rgb

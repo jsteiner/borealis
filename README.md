@@ -42,7 +42,7 @@ Change the defaults:
 borealis = Borealis.new('image/path.jpg',
   size: '150x150',
   colors: 3,
-  iterations: 10,
+  delta: 0.001,
   static: false
 )
 ```
@@ -78,7 +78,7 @@ Borealis uses the [k-means](http://en.wikipedia.org/wiki/K-means_clustering) clu
 1. Takes _n_ colors from the image as cluster centers
 2. Adds the rest of the colors to the cluster which they are closest to
 3. Finds the average color in each cluster, setting the results as new cluster centers
-4. Empties each cluster, except for the new center, and repeats steps 2-3 for _k_ iterations
+4. Empties each cluster, except for the new center, and repeats steps 2-3 until convergance has been reached
 
 ## Contributing
 
@@ -87,3 +87,7 @@ Borealis uses the [k-means](http://en.wikipedia.org/wiki/K-means_clustering) clu
 3. Commit your changes (`git commit -am 'Add some feature'`)
 4. Push to the branch (`git push origin my-new-feature`)
 5. Create new Pull Request
+
+## License
+
+Borealis is copyright 2013 Josh Steiner and thoughtbot, inc., and may be redistributed under the terms specified in the LICENSE file.
