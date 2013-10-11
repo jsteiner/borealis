@@ -15,14 +15,10 @@ class Borealis
       if @colors.length == @number_of_clusters
         @colors.map { |color| Cluster.new(color) }
       else
-        pigs_can_fly = false
-        until pigs_can_fly do
+        max_delta = 0
+        while max_delta <= @delta do
           @colors.each { |color| add_to_closest_cluster(color) }
           max_delta = clusters.map { |cluster| cluster.recenter! }.max
-
-          if max_delta <= @delta
-            break
-          end
         end
 
         clusters
