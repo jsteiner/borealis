@@ -1,3 +1,5 @@
+require 'cocaine'
+
 class Borealis
   class ImageConverter
     def initialize(image, size)

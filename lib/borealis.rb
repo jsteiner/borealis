@@ -1,5 +1,3 @@
-require 'cocaine'
-
 require 'borealis/cluster'
 require 'borealis/color'
 require 'borealis/image_converter'
