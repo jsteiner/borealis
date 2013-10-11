@@ -25,7 +25,7 @@ class Borealis
 
       @colors.clear
 
-      old_center.distance_to @center
+      old_center.rgb_distance_to @center
     end
   end
 end

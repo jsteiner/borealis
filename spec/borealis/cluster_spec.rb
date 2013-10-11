@@ -9,12 +9,11 @@ describe Borealis::Cluster, '#recenter!' do
 
     cluster.recenter!
 
-    expected_distance = center.distance_to(cluster.center)
     expect(cluster.center).to eq Borealis::Color.new(3, 5, 7)
   end
 
   it 'creates a new color in the center of existing colors' do
-    center = stub('center', :distance_to)
+    center = stub('center', :rgb_distance_to)
     cluster = Borealis::Cluster.new(center)
     cluster.colors << Borealis::Color.new(2, 4, 6)
     cluster.colors << Borealis::Color.new(4, 6, 8)
@@ -25,7 +24,7 @@ describe Borealis::Cluster, '#recenter!' do
   end
 
   it 'empties its colors' do
-    center = stub('center', :distance_to)
+    center = stub('center', :rgb_distance_to)
     cluster = Borealis::Cluster.new(center)
     cluster.colors << Borealis::Color.new(1, 2, 3)
 

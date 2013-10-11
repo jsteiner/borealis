@@ -36,6 +36,23 @@ color.rgb # "(222, 2, 15)"
 color.hex # "#DE020F"
 ```
 
+Measure distance between colors:
+
+```ruby
+orange.rgb_distance_to red #=> 127.0
+orange.lab_distance_to red #=> 39.79252198414681
+
+maroon.rgb_distance_to dark_red #=> 11.0
+maroon.lab_distance_to dark_read #=> 5.071593528474779
+```
+
+Calculate CIE-L\*a\*b\* value of an sRGB color:
+
+```ruby
+cyan = Borealis::Color.new(0, 255, 255)
+cyan.to_lab #=> [91.11652110946342, -48.079618466228716, -14.138127754846131]
+```
+
 Change the defaults:
 
 ```ruby

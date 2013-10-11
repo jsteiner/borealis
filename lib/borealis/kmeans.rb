@@ -44,7 +44,7 @@ class Borealis
 
     def add_to_closest_cluster(color)
       closest_cluster = clusters.min do |a, b|
-        color.distance_to(a.center) <=> color.distance_to(b.center)
+        color.rgb_distance_to(a.center) <=> color.rgb_distance_to(b.center)
       end
 
       closest_cluster.colors << color
