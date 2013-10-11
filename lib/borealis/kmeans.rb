@@ -1,9 +1,5 @@
 class Borealis
   class KMeans
-    def self.run(colors, options = {})
-      KMeans.new(colors, options).run
-    end
-
     def initialize(colors, options = {})
       @colors = colors
       @number_of_clusters = options[:number_of_clusters] || 3

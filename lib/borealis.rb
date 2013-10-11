@@ -9,10 +9,8 @@ class Borealis
 
   def initialize(file, options = {})
     image_colors = ImageConverter.to_colors(file, options[:size])
-    clusters = KMeans.run(image_colors, parse_options(options))
+    clusters = KMeans.new(image_colors, parse_options(options)).run
     @colors = clusters.map(&:center)
-
-    self
   end
 
   def hexes

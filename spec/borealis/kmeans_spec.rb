@@ -11,18 +11,6 @@ describe Borealis::KMeans do
   end
 end
 
-describe Borealis::KMeans, '.run' do
-  it 'calls run on an instance of KMeans' do
-    colors = stub('colors')
-    kmeans = stub('kmeans', :run)
-    Borealis::KMeans.stubs(new: kmeans)
-
-    Borealis::KMeans.run(colors)
-
-    expect(kmeans).to have_received(:run)
-  end
-end
-
 describe Borealis::KMeans, '#run' do
   it 'sets the colors as cluster centers if there are as many colors as clusters' do
     colors = []
