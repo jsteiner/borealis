@@ -7,10 +7,6 @@ class Borealis
       @size = size || '50x50'
     end
 
-    def self.to_colors(image, size)
-      ImageConverter.new(image, size).to_colors
-    end
-
     def read_image
       Cocaine::CommandLine.new(
         'convert',

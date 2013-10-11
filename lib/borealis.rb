@@ -8,7 +8,7 @@ class Borealis
   attr_reader :colors
 
   def initialize(file, options = {})
-    image_colors = ImageConverter.to_colors(file, options[:size])
+    image_colors = ImageConverter.new(file, options[:size]).to_colors
     clusters = KMeans.new(image_colors, parse_options(options)).run
     @colors = clusters.map(&:center)
   end

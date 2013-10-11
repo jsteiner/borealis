@@ -1,21 +1,9 @@
 require 'spec_helper'
 
-describe Borealis::ImageConverter, '.to_colors' do
-  it 'calls to_colors on an instance of ImageConverter' do
-    image = 'spec/fixtures/aurora_borealis.jpg'
-    image_converter = stub('image converter', :to_colors)
-    Borealis::ImageConverter.stubs(new: image_converter)
-
-    Borealis::ImageConverter.to_colors(image, '10x10!')
-
-    expect(image_converter).to have_received(:to_colors)
-  end
-end
-
 describe Borealis::ImageConverter, '#to_colors' do
   it 'returns as many colors as there are pixels' do
     image = 'spec/fixtures/aurora_borealis.jpg'
-    colors = Borealis::ImageConverter.to_colors(image, '10x10!')
+    colors = Borealis::ImageConverter.new(image, '10x10!').to_colors
 
     expect(colors.length).to eq 100
   end
