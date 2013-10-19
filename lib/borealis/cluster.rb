@@ -8,6 +8,10 @@ class Borealis
     end
 
     def recenter!
+      if colors.empty?
+        return 255
+      end
+
       red_sum = green_sum = blue_sum = 0
 
       colors.each do |color|
